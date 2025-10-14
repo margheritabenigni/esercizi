@@ -22,7 +22,13 @@ for i in range(0,20):
 for x in range(0,20):
     if x[i]>massimo:
  print (massimo)
-# ho aggiunto la ricerca del punto con ascissa massima 
+# ho aggiunto la ricerca del punto con ascissa massima
+
+for i in range(0,20):
+    if y[i]<minimo:
+        minimo=y[i]
+print(minimo,x[minimo])
+
 punti_cartesiano=[]
 for i in range(0,20):
     punto = (random.randint(0,10),random.randint(0,10))
