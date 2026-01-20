@@ -1,0 +1,41 @@
+#scrivere un programma che dati due numeri interi random
+#in un intervallo 0,100 ne calcoli lasomma, necalcoli la differenza
+#e controlli se la differenza è minore di una certa
+#soglia fissata
+#a priori nel main.
+#sottoproblemi:
+#1) Somma di due numeri (procedura)
+#2) Differenza tra due nuemeri (funzione)
+#3) Verificare se un numero è minore di una
+#(procedura)
+
+import random
+
+def stampa_somma(x, y):
+    risultato = x + y
+    print(risultato)
+
+def calcola_diff(x, y):
+    return x - y
+
+def verifica_soglia(valore, limite):
+    if valore < limite:
+        print("La differenza è minore della soglia")
+    else:
+        print("La differenza è maggiore della soglia")
+
+
+if __name__ == "__main__":
+    limite = 20
+
+    n1 = random.randint(0, 100)
+    n2 = random.randint(0, 100)
+
+    print(n1, n2)
+
+    stampa_somma(n1, n2)
+
+    diff = calcola_diff(n1, n2)
+    print(diff)
+
+    verifica_soglia(diff, limite)
