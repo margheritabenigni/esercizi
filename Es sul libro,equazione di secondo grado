@@ -1,0 +1,38 @@
+random
+  Scrivi "Inserisci il valore di a"
+  Leggi a
+  Scrivi "Inserisci il valore di b"
+  Leggi b
+  Scrivi "Inserisci il valore di c"
+  Leggi c
+
+  SE a = 0 ALLORA
+      Scrivi "Equazione di primo grado"
+
+      SE b = 0 ALLORA
+          Scrivi "Nessuna soluzione"
+      ALTRIMENTI
+          x = -c / b
+          Scrivi "La soluzione è"
+          Scrivi x
+      FINE SE
+
+  ALTRIMENTI
+      Scrivi "Equazione di secondo grado"
+
+      delta = b*b - 4*a*c
+      Scrivi "Il discriminante è"
+      Scrivi delta
+
+      SE delta < 0 ALLORA
+          Scrivi "Non esistono soluzioni reali"
+      ALTRIMENTI SE delta = 0 ALLORA
+          x = -b / (2*a)
+          Scrivi "Soluzione doppia"
+          Scrivi x
+      ALTRIMENTI
+          x1 = (-b + radice(delta)) / (2*a)
+          x2 = (-b - radice(delta)) / (2*a)
+          Scrivi "Soluzioni reali distinte"
+          Scrivi x1
+          Scrivi x2
