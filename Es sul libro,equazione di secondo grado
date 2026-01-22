@@ -1,4 +1,4 @@
-random
+ import random
   Scrivi "Inserisci il valore di a"
   Leggi a
   Scrivi "Inserisci il valore di b"
