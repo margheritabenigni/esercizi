@@ -1,0 +1,70 @@
+# Importo il modulo random per generare numeri casuali
+import random
+
+# Procedura per creare la lista di 10 numeri casuali
+def creaNumeri(elenco):
+    
+    # Chiedo all’utente il primo estremo
+    primoLimite = input("Inserire il primo estremo: ")
+    primoLimite = int(primoLimite)  # Converto in intero
+    
+    # Chiedo all’utente il secondo estremo
+    secondoLimite = input("Inserire il secondo estremo: ")
+    secondoLimite = int(secondoLimite)  # Converto in intero
+    
+    # Ciclo per generare 10 numeri casuali
+    for i in range(0,10):
+        
+        # Controllo quale dei due numeri è maggiore
+        if secondoLimite > primoLimite:
+            numero = random.randint(primoLimite, secondoLimite)
+        else:
+            numero = random.randint(secondoLimite, primoLimite)
+        
+        # Aggiungo il numero generato alla lista
+        elenco.append(numero)
+
+
+# Funzione per calcolare la media dei valori della lista
+def calcolaMedia(elenco):
+    
+    somma = 0  # Variabile per memorizzare la somma
+    
+    # Scorro tutti i valori della lista
+    for valore in elenco:
+        somma = somma + valore  # Sommo ogni valore
+    
+    # Calcolo la media dividendo la somma per il numero di elementi
+    risultatoMedia = somma / len(elenco)
+    
+    # Restituisco la media
+    return risultatoMedia
+
+
+# Funzione per calcolare la soglia (massimo - 10)
+def trovaSoglia(elenco):
+    
+    valoreMassimo = 0  # Variabile per memorizzare il massimo
+    
+    # Scorro la lista per trovare il valore massimo
+    for valore in elenco:
+        if valore > valoreMassimo:
+            valoreMassimo = valore
+    
+    # Calcolo la soglia sottraendo 10 al massimo
+    limiteSoglia = valoreMassimo - 10
+    
+    # Restituisco la soglia
+    return limiteSoglia
+
+
+# Programma principale
+if __name__ == "__main__":
+    
+    listaValori = []  # Creo una lista vuota
+    
+    creaNumeri(listaValori)  # Genero i numeri casuali
+    
+    mediaFinale = calcolaMedia(listaValori)  # Calcolo la media
+    
+    sogliaFinale = trovaSoglia(listaValori)  # Calcolo la soglia
