@@ -1,0 +1,13 @@
+import random
+
+numeri = []
+
+for i in range(10):
+    numeri.append(random.randint(1, 100))  # numeri casuali da 1 a 100
+
+somma = 0
+for i in range(len(numeri)):
+    somma = somma + numeri[i]
+
+print("Lista:", numeri)
+print("Somma:", somma)
