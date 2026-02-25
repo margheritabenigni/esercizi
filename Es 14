@@ -1,0 +1,7 @@
+import random  
+
+nomi = ["Anna", "Luca", "Alessio", "Marco", "Alice"]
+
+for i in range(len(nomi)):
+    if nomi[i][0] == "A":
+        print(nomi[i])
