@@ -1,0 +1,8 @@
+import random  
+
+quadrati = []
+
+for i in range(1, 11):
+    quadrati.append(i * i)
+
+print("Quadrati:", quadrati)
