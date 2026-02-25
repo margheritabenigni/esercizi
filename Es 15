@@ -1,0 +1,27 @@
+import random  
+
+numero = 5
+multipli = []
+
+for i in range(numero, 51, numero):
+    multipli.append(i)
+
+print("Multipli:", multipli)
+
+import random
+
+studenti = ["Anna", "Luca", "Marco", "Giulia", "Sara"]
+voti = []
+
+for i in range(len(studenti)):
+    voto = random.randint(6, 10)  # voto casuale tra 6 e 10
+    voti.append(voto)
+    print(studenti[i], "ha preso", voto)
+
+somma = 0
+for i in range(len(voti)):
+    somma = somma + voti[i]
+
+media = somma / len(voti)
+print("Media classe:", media)
+
