@@ -1,0 +1,9 @@
+import random
+numeri = [10, 15, 20, 25, 30]
+filtrati = []
+
+for i in range(len(numeri)):
+    if numeri[i] > 20:
+        filtrati.append(numeri[i])
+
+print("Numeri maggiori di 20:", filtrati)
