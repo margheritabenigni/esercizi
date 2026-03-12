@@ -1,0 +1,29 @@
+def_massa_molare(formula)
+# Valori semplificati
+
+if formula == "H2O":
+return 18
+
+if formula == "NaCl":
+return 58.5
+
+if formula == "CO2":
+return 44
+return 0
+
+def moli_da_massa(massa_g, formula, unita="g"
+"""Restituisce la quantità in moli moli=massa_g/massa_molare"""
+moli = massa_g / massa_molare
+
+
+
+def massa_da_moli(moli, formula):
+"""Redastituisce la massa in grammi massa_g=moli*massa_molare"""
+massa_g = moli * massa_molare 
+
+moli_H2O = moli_massa(90,"H2O")
+print("In 90 kg di moli ci sono",moli_H2O)
+massa_CO2 = massa_moli(5,"CO2")
+print=("1.5 kg di CO2",massa_CO2)
+
+def stampa_confronto(formula1,massa1
