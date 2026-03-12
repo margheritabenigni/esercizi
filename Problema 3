@@ -1,0 +1,10 @@
+def aggiungi_voto(registro,voto):
+ registro.append(voto)
+ 
+def media_registro(registro,arrotonda_a=0):
+media = sum(registro) / len(registro)
+return round(media,arrotonda_a)
+
+classe = [ 6,7,5,8]
+aggiungi_voto(classe_9)
+print(media_registro(classe, arrotonda_a=1))
