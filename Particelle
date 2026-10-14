@@ -1,0 +1,51 @@
+class Particella:
+    def __init__(self, nome, massa, carica, spin):
+        self.nome = nome
+        self.massa = massa
+        self.carica = carica
+        self.spin = spin
+
+    def energia_riposo(self):
+        return self.massa * (3*10**8)**2
+
+    def info(self):
+        print(self.nome, self.massa, self.carica, self.spin)
+
+    def e_stabile(self):
+        if self.nome == "elettrone" or self.nome == "protone" or self.nome == "neutrone" or self.nome == "fotone":
+            return True
+        else:
+            return False
+
+class Carica(Particella):
+    def __init__(self, nome, massa, carica, spin):
+        super().__init__(nome, massa, carica, spin)
+
+    def forza_coulomb(self, altra_particella, R):
+        k = 9*10**9
+        return k * ((self.carica * altra_particella.carica) / R**2)
+
+class Neutra(Particella):
+    def __init__(self, nome, massa, carica, spin):
+        super().__init__(nome, massa, carica, spin)
+
+    def forza_coulomb(self):
+        return 0
+
+    def particella_neutra(self):
+        print("particella neutra")
+
+particellagenerica = Particella("elettrone", 9.1e-31, -1.6e-19, 0.5)
+
+particellacarica = Carica("protone", 1.67e-27, 1.6e-19, 0.5)
+
+particellaneutra = Neutra("neutrone", 1.67e-27, 0, 0.5)
+
+particellagenerica.info()
+print(particellagenerica.energia_riposo())
+print(particellagenerica.e_stabile())
+
+print(particellacarica.forza_coulomb(particellacarica, 2))
+
+particellaneutra.particella_neutra()
+print(particellaneutra.forza_coulomb()
