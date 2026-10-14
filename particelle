@@ -1,0 +1,65 @@
+class Particella:
+    def __init__(self, nome, massa, carica, spin):
+        self.nome = nome
+        self.massa = massa
+        self.carica = carica
+        self.spin = spin
+
+    def energia_riposo(self):
+        c = 3e8
+        return self.massa * c**2
+
+    def info(self):
+        print("Nome:", self.nome)
+        print("Massa:", self.massa)
+        print("Carica:", self.carica)
+        print("Spin:", self.spin)
+
+    def e_stabile(self):
+        if self.nome in ["elettrone", "protone", "neutrone", "fotone"]:
+            return True
+        else:
+            return False
+
+
+class ParticellaCarica(Particella):
+    def __init__(self, nome, massa, carica, spin):
+        super().__init__(nome, massa, carica, spin)
+
+    def tipo_carica(self):
+        if self.carica > 0:
+            print("Particella positiva")
+        else:
+            print("Particella negativa")
+
+    def forza_coulomb(self, altra, R):
+        k = 9e9
+        return abs(k * self.carica * altra.carica / R**2)
+
+
+class ParticellaNeutra(Particella):
+    def __init__(self, nome, massa, carica, spin):
+        super().__init__(nome, massa, carica, spin)
+
+    def forza_coulomb(self, altra, R):
+        return 0
+
+    def stampa_tipo(self):
+        print("particella neutra")
+
+
+# particella generica
+particellagenerica = Particella("fotone", 0, 0, 1)
+particellagenerica.info()
+print(particellagenerica.energia_riposo())
+print(particellagenerica.e_stabile())
+
+# particella carica
+particellaelettrone = ParticellaCarica("elettrone", 9.11e-31, -1.6e-19, 0.5)
+particellaelettrone.tipo_carica()
+
+# particella neutra
+partcellaneutra = ParticellaNeutra("neutrone", 1.675e-27, 0, 0.5)
+partcellaneutra.stampa_tipo()
+
+print(partcellaneutra.forza_coulomb(particellaelettrone, 1e-10))
