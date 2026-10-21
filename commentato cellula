@@ -1,0 +1,315 @@
+Certo\! Ti riscrivo tutto il codice di prima, commentato riga per riga in italiano, mantenendo gli stessi nomi delle classi, degli attributi e dei metodi dell'UML. I commenti spiegano cosa fa ogni istruzione e perché viene utilizzata.
+
+## Codice Python commentato — `Classe_Cellula.py`
+
+python
+```
+
+# Classe che rappresenta un organello della cellula
+class Organello:
+
+    # Costruttore: viene eseguito quando creiamo un organello
+    def __init__(self, nome, efficienza, energia_base):
+
+        # Salva il nome dell'organello
+        self.nome = nome
+
+        # Salva l'efficienza dell'organello
+        self.efficienza = efficienza
+
+        # Controlla che l'energia di base sia positiva
+        if energia_base <= 0:
+
+            # Genera un errore se l'energia non è valida
+            raise ValueError("L'energia base deve essere positiva.")
+
+        # Controlla che l'efficienza sia maggiore di 0 e minore o uguale a 1
+        if not 0 < efficienza <= 1:
+
+            # Genera un errore se l'efficienza non è valida
+            raise ValueError("L'efficienza deve essere tra 0 e 1.")
+
+        # Salva l'energia di base in un attributo privato
+        # È privato perché vogliamo proteggere questo valore
+        self.__energia_base = energia_base
+
+    # Metodo che calcola l'energia prodotta dall'organello
+    def calcola_energia(self):
+
+        # Moltiplica l'energia di base per l'efficienza
+        return self.__energia_base * self.efficienza
+
+    # Metodo che stampa le informazioni dell'organello
+    def descrizione(self):
+
+        # Stampa il nome dell'organello
+        print("Nome organello:", self.nome)
+
+        # Stampa l'efficienza dell'organello
+        print("Efficienza:", self.efficienza)
+
+        # Calcola e stampa l'energia prodotta
+        print("Energia prodotta:", self.calcola_energia())
+
+# Classe padre che rappresenta una cellula generica
+class Cellula:
+
+    # Costruttore della classe Cellula
+    def __init__(self, nome, intatto, membrana, forma, dimensione):
+
+        # Salva il nome della cellula
+        self.nome = nome
+
+        # Salva se la cellula è intatta
+        self.intatto = intatto
+
+        # Salva la forma della cellula
+        self.forma = forma
+
+        # Controlla che membrana sia un valore booleano
+        if not isinstance(membrana, bool):
+
+            # Genera un errore se membrana non è True o False
+            raise ValueError("La membrana deve essere True o False.")
+
+        # Salva la membrana come attributo privato
+        self.__membrana = membrana
+
+        # Controlla che la dimensione sia positiva
+        if dimensione <= 0:
+
+            # Genera un errore se la dimensione non è valida
+            raise ValueError("La dimensione deve essere positiva.")
+
+        # Salva la dimensione della cellula
+        self.dimensione = dimensione
+
+        # Crea una lista privata inizialmente vuota
+        # Qui verranno inseriti gli organelli della cellula
+        self.__organelli = []
+
+        # Inizializza a zero l'energia totale della cellula
+        self.__energia_totale = 0
+
+    # Metodo che restituisce il numero di organelli presenti
+    def numero_organelli(self):
+
+        # Restituisce la lunghezza della lista degli organelli
+        return len(self.__organelli)
+
+    # Metodo che restituisce il tipo di nutrizione
+    # Nella classe generica non è ancora specificato
+    def tipo_nutrizione(self):
+
+        # Restituisce un valore generico
+        return "Non specificato"
+
+    # Metodo che aggiunge un organello alla cellula
+    def aggiungi_organello(self, organello):
+
+        # Controlla che l'oggetto ricevuto sia un Organello
+        if not isinstance(organello, Organello):
+
+            # Genera un errore se l'oggetto non è valido
+            raise ValueError("Devi inserire un oggetto Organello.")
+
+        # Aggiunge l'organello alla lista privata
+        self.__organelli.append(organello)
+
+    # Metodo che calcola l'energia totale della cellula
+    def calcola_energia_totale(self):
+
+        # Azzera il totale prima di effettuare il calcolo
+        self.__energia_totale = 0
+
+        # Scorre tutti gli organelli contenuti nella cellula
+        for organello in self.__organelli:
+
+            # Aggiunge al totale l'energia di ogni organello
+            self.__energia_totale += organello.calcola_energia()
+
+        # Restituisce il risultato finale
+        return self.__energia_totale
+
+    # Metodo che stampa le informazioni della cellula
+    def descrizione(self):
+
+        # Stampa il nome della cellula
+        print("Nome cellula:", self.nome)
+
+        # Stampa se la cellula è intatta
+        print("Intatta:", self.intatto)
+
+        # Stampa il valore della membrana privata
+        print("Membrana:", self.__membrana)
+
+        # Stampa la forma della cellula
+        print("Forma:", self.forma)
+
+        # Stampa la dimensione della cellula
+        print("Dimensione:", self.dimensione)
+
+        # Stampa il numero di organelli
+        print("Numero organelli:", self.numero_organelli())
+
+        # Stampa il tipo di nutrizione
+        # Il metodo verrà ridefinito nelle classi figlie
+        print("Tipo di nutrizione:", self.tipo_nutrizione())
+
+        # Calcola e stampa l'energia totale
+        print("Energia totale:", self.calcola_energia_totale())
+
+# Classe figlia che rappresenta una cellula animale
+class CellulaAnimale(Cellula):
+
+    # Costruttore della classe CellulaAnimale
+    def __init__(self, nome, intatto, membrana, forma,
+                 dimensione, centrioli):
+
+        # Richiama il costruttore della classe padre Cellula
+        # In questo modo inizializza gli attributi comuni
+        super().__init__(
+            nome, intatto, membrana, forma, dimensione
+        )
+
+        # Controlla che centrioli sia un valore booleano
+        if not isinstance(centrioli, bool):
+
+            # Genera un errore se il valore non è True o False
+            raise ValueError("I centrioli devono essere True o False.")
+
+        # Salva la presenza o assenza dei centrioli
+        self.centrioli = centrioli
+
+    # Ridefinisce il metodo della classe padre
+    def tipo_nutrizione(self):
+
+        # Le cellule animali hanno nutrizione eterotrofa
+        return "Eterotrofa"
+
+    # Ridefinisce il metodo di descrizione della classe padre
+    def descrizione(self):
+
+        # Esegue prima la descrizione generale della cellula
+        super().descrizione()
+
+        # Aggiunge la stampa dei centrioli
+        print("Centrioli:", self.centrioli)
+
+# Classe figlia che rappresenta una cellula vegetale
+class CellulaVegetale(Cellula):
+
+    # Costruttore della classe CellulaVegetale
+    def __init__(self, nome, intatto, membrana, forma,
+                 dimensione, spessore_parete):
+
+        # Richiama il costruttore della classe padre
+        super().__init__(
+            nome, intatto, membrana, forma, dimensione
+        )
+
+        # Controlla che lo spessore della parete sia positivo
+        if spessore_parete <= 0:
+
+            # Genera un errore se lo spessore non è valido
+            raise ValueError(
+                "Lo spessore della parete deve essere positivo."
+            )
+
+        # Salva lo spessore della parete cellulare
+        self.spessore_parete = spessore_parete
+
+    # Ridefinisce il metodo della classe padre
+    def tipo_nutrizione(self):
+
+        # Le cellule vegetali sono autotrofe
+        return "Autotrofa"
+
+    # Ridefinisce il metodo di descrizione della classe padre
+    def descrizione(self):
+
+        # Esegue la descrizione generale della cellula
+        super().descrizione()
+
+        # Aggiunge la stampa dello spessore della parete
+        print("Spessore parete:", self.spessore_parete)
+
+# ---------------- TEST DEL PROGRAMMA ----------------
+
+# Crea un mitocondrio per la cellula animale
+mitocondrio_animale = Organello("Mitocondrio", 0.8, 100)
+
+# Crea un ribosoma per la cellula animale
+ribosoma_animale = Organello("Ribosoma", 0.5, 20)
+
+# Crea un mitocondrio per la cellula vegetale
+mitocondrio_vegetale = Organello("Mitocondrio", 0.8, 100)
+
+# Crea un cloroplasto per la cellula vegetale
+cloroplasto = Organello("Cloroplasto", 0.9, 150)
+
+# Crea un ribosoma per la cellula vegetale
+ribosoma_vegetale = Organello("Ribosoma", 0.5, 20)
+
+# Crea una cellula animale con i valori indicati
+animale = CellulaAnimale(
+    "Cellula animale", True, True, "Irregolare", 20, True
+)
+
+# Crea una cellula vegetale con i valori indicati
+vegetale = CellulaVegetale(
+    "Cellula vegetale", True, True, "Regolare", 30, 2.5
+)
+
+# Aggiunge il mitocondrio alla cellula animale
+animale.aggiungi_organello(mitocondrio_animale)
+
+# Aggiunge il ribosoma alla cellula animale
+animale.aggiungi_organello(ribosoma_animale)
+
+# Aggiunge il mitocondrio alla cellula vegetale
+vegetale.aggiungi_organello(mitocondrio_vegetale)
+
+# Aggiunge il cloroplasto alla cellula vegetale
+vegetale.aggiungi_organello(cloroplasto)
+
+# Aggiunge il ribosoma alla cellula vegetale
+vegetale.aggiungi_organello(ribosoma_vegetale)
+
+# Stampa il titolo della sezione della cellula animale
+print("--- CELLULA ANIMALE ---")
+
+# Stampa tutte le informazioni della cellula animale
+animale.descrizione()
+
+# Stampa una riga vuota per separare le sezioni
+print()
+
+# Stampa il titolo della sezione della cellula vegetale
+print("--- CELLULA VEGETALE ---")
+
+# Stampa tutte le informazioni della cellula vegetale
+vegetale.descrizione()
+
+# Stampa una riga vuota per separare le sezioni
+print()
+
+# Stampa il titolo della sezione degli organelli
+print("--- ORGANELLO ---")
+
+# Stampa le informazioni del mitocondrio animale
+mitocondrio_animale.descrizione()
+```
+
+## 3. Le cose più importanti da capire
+
+- `__init__()` è il costruttore: serve a inizializzare gli attributi quando crei un oggetto.
+- `self` indica l'oggetto su cui stai lavorando.
+- `super().__init__(...)` richiama il costruttore della classe padre.
+- `self.__organelli` è una lista privata che contiene gli organelli della cellula.
+- `for organello in self.__organelli` passa in rassegna ogni organello.
+- `raise ValueError(...)` interrompe la creazione dell'oggetto se un valore non è valido.
+- `return` restituisce un risultato, mentre `print()` lo visualizza sullo schermo.
+- `super().descrizione()` riutilizza la descrizione generale della classe padre, evitando di riscriverla nelle classi figlie.
+
+Nota: i commenti non cambiano il funzionamento del programma. Ho mantenuto i nomi e la struttura del codice precedente, così puoi confrontarlo direttamente con il tuo UML.
