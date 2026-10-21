@@ -1,0 +1,146 @@
+class Organello:
+    def __init__(self, nome, efficienza, energia_base):
+        self.nome = nome
+        self.efficienza = efficienza
+
+        if energia_base <= 0:
+            raise ValueError("L'energia base deve essere positiva.")
+
+        if not 0 < efficienza <= 1:
+            raise ValueError("L'efficienza deve essere tra 0 e 1.")
+
+        # Privato per proteggere il valore energetico.
+        self.__energia_base = energia_base
+
+    def calcola_energia(self):
+        return self.__energia_base * self.efficienza
+
+    def descrizione(self):
+        print("Nome organello:", self.nome)
+        print("Efficienza:", self.efficienza)
+        print("Energia prodotta:", self.calcola_energia())
+
+
+class Cellula:
+    def __init__(self, nome, intatto, membrana, forma, dimensione):
+        self.nome = nome
+        self.intatto = intatto
+        self.forma = forma
+
+        if not isinstance(membrana, bool):
+            raise ValueError("La membrana deve essere True o False.")
+        self.__membrana = membrana
+
+        if dimensione <= 0:
+            raise ValueError("La dimensione deve essere positiva.")
+        self.dimensione = dimensione
+
+        self.__organelli = []
+        self.__energia_totale = 0
+
+    def numero_organelli(self):
+        return len(self.__organelli)
+
+    def tipo_nutrizione(self):
+        return "Non specificato"
+
+    def aggiungi_organello(self, organello):
+        if not isinstance(organello, Organello):
+            raise ValueError("Devi inserire un oggetto Organello.")
+
+        self.__organelli.append(organello)
+
+    def calcola_energia_totale(self):
+        self.__energia_totale = 0
+
+        for organello in self.__organelli:
+            self.__energia_totale += organello.calcola_energia()
+
+        return self.__energia_totale
+
+    def descrizione(self):
+        print("Nome cellula:", self.nome)
+        print("Intatta:", self.intatto)
+        print("Membrana:", self.__membrana)
+        print("Forma:", self.forma)
+        print("Dimensione:", self.dimensione)
+        print("Numero organelli:", self.numero_organelli())
+        print("Tipo di nutrizione:", self.tipo_nutrizione())
+        print("Energia totale:", self.calcola_energia_totale())
+
+
+class CellulaAnimale(Cellula):
+    def __init__(self, nome, intatto, membrana, forma,
+                 dimensione, centrioli):
+        super().__init__(
+            nome, intatto, membrana, forma, dimensione
+        )
+
+        if not isinstance(centrioli, bool):
+            raise ValueError("I centrioli devono essere True o False.")
+
+        self.centrioli = centrioli
+
+    def tipo_nutrizione(self):
+        return "Eterotrofa"
+
+    def descrizione(self):
+        super().descrizione()
+        print("Centrioli:", self.centrioli)
+
+
+class CellulaVegetale(Cellula):
+    def __init__(self, nome, intatto, membrana, forma,
+                 dimensione, spessore_parete):
+        super().__init__(
+            nome, intatto, membrana, forma, dimensione
+        )
+
+        if spessore_parete <= 0:
+            raise ValueError(
+                "Lo spessore della parete deve essere positivo."
+            )
+
+        self.spessore_parete = spessore_parete
+
+    def tipo_nutrizione(self):
+        return "Autotrofa"
+
+    def descrizione(self):
+        super().descrizione()
+        print("Spessore parete:", self.spessore_parete)
+
+mitocondrio_animale = Organello("Mitocondrio", 0.8, 100)
+ribosoma_animale = Organello("Ribosoma", 0.5, 20)
+
+mitocondrio_vegetale = Organello("Mitocondrio", 0.8, 100)
+cloroplasto = Organello("Cloroplasto", 0.9, 150)
+ribosoma_vegetale = Organello("Ribosoma", 0.5, 20)
+
+animale = CellulaAnimale(
+    "Cellula animale", True, True, "Irregolare", 20, True
+)
+
+vegetale = CellulaVegetale(
+    "Cellula vegetale", True, True, "Regolare", 30, 2.5
+)
+
+animale.aggiungi_organello(mitocondrio_animale)
+animale.aggiungi_organello(ribosoma_animale)
+
+vegetale.aggiungi_organello(mitocondrio_vegetale)
+vegetale.aggiungi_organello(cloroplasto)
+vegetale.aggiungi_organello(ribosoma_vegetale)
+
+print("cellula animale")
+animale.descrizione()
+
+print()
+
+print("cellula vegetale")
+vegetale.descrizione()
+
+print()
+
+print("organello")
+mitocondrio_animale.descrizione()
