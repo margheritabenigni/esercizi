@@ -1,7 +1,7 @@
 class Filosofo:
     def __init__(self, nome, anno):
-        self.nome = nome
-        self.anno = anno
+        self.nome = nome #memorizza il nome
+        self.anno = anno #memorizza l'anno 
 
     def caratteristiche(self):
         print("Nome:", self.nome)
@@ -31,7 +31,7 @@ class ScuolaFilosofica:
 class Platonismo(ScuolaFilosofica):
     def __init__(self, nome, fondatore, epoca, filosofi,
           valore_virtu_principale):
-        super().__init__(nome, fondatore, epoca, filosofi)
+        super().__init__(nome, fondatore, epoca, filosofi)    #richiama il costruttore della classe base
         self.valore_virtu_principale = valore_virtu_principale
 
     def descrivi(self):
@@ -49,10 +49,10 @@ class Aristotelismo(ScuolaFilosofica):
         self.obiettivo_principale = obiettivo_principale
 
     def descrivi(self):
-        print("Nome scuola:", self.nome)
-        print("Fondatore scuola:", self.fondatore)
-        print("Epoca:", self.epoca)
-        print("Obiettivo principale:", self.obiettivo_principale)
+        print("Nome scuola:", self.nome) #stampa  il nome della scuola che inserisco 
+        print("Fondatore scuola:", self.fondatore) #stampa il fondatore della scuola
+        print("Epoca:", self.epoca) #stampa l'epoca 
+        print("Obiettivo principale:", self.obiettivo_principale) #stampa l'obbiettivo principale
 
 
 # Creazione dei filosofi
